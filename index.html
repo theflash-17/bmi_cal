@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="robots" content="noindex">
+        <link rel="stylesheet" href="style.css">
+        <title>BMI Calculator</title>
+    </head>
+    <header>
+        <div id="header.php">
+            <center><h1>BMI Calculator</h1></center>
+            <center><h2>This webpage calculate Body Mass Index (BMI).</h2></center>
+            <br>
+        </div>
+    </header>
+    <body>      
+        <center>
+            <form>
+                <label for="height">Height (in centimeters):</label>
+                <input type="number" id="height" placeholder="Enter your height" required><br>
+                <br>
+                <label for="weight">Weight (in kilograms):</label>
+                <input type="number" id="weight" placeholder="Enter your weight" required><br>
+                <br>
+                <button type="button" onclick="calculateBMI()">Calculate BMI</button>
+            </form>
+            <div id="result"></div>
+        </center> 
+        <br>
+        <footer>
+            <center>
+            <div id="footer.html">
+                &copy; 2023
+            </div>
+            </center>
+        </footer>
+
+        <script>
+            function calculateBMI() {
+                // Get user input for height and weight
+                var height = parseFloat(document.getElementById("height").value);
+                var weight = parseFloat(document.getElementById("weight").value);
+    
+                if (!isNaN(height) && !isNaN(weight)) {
+                    // Calculate BMI (weight in kilograms / (height in meters)^2)
+                    var heightInMeters = height / 100;
+                    var bmi = weight / (heightInMeters * heightInMeters);
+    
+                    // Provide comments based on BMI
+                    var comment = "";
+                    if (bmi < 18.5) {
+                        comment = "Underweight";
+                    } else if (bmi >= 18.5 && bmi < 24.9) {
+                        comment = "Normal weight";
+                    } else if (bmi >= 25 && bmi < 29.9) {
+                        comment = "Overweight";
+                    } else {
+                        comment = "Obese";
+                    }
+    
+                    // Display the result
+                    var result = "<br>Your BMI is: " + bmi.toFixed(2) + "<br><br>Comment: " + comment;
+                    document.getElementById("result").innerHTML = result;
+                } else {
+                    document.getElementById("result").innerHTML = "Please enter valid height and weight.";
+                }
+            }
+        </script>
+    </body>
+</html>
